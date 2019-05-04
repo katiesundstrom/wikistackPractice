@@ -5,6 +5,10 @@ const morgan = require('morgan');
 
 const path = require('path');
 
+const layout = require('./views/layout');
+
+const { db } = require('./models');
+
 // calling express creates an express application
 const app = express();
 
@@ -23,12 +27,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
-  res.json('hello world!');
+  res.send(layout(''));
 });
 
 // assign your PORT
-const PORT = 1337;
+const PORT = 3000;
 
+// start your server listening
 app.listen(PORT, () => {
   console.log(`App listening in port ${PORT}`);
 });
