@@ -7,8 +7,6 @@ const path = require('path');
 
 const layout = require('./views/layout');
 
-const models = require('./models');
-
 // calling express creates an express application
 const app = express();
 
@@ -30,21 +28,6 @@ app.get('/', (req, res, next) => {
   res.send(layout(''));
 });
 
-// assign your PORT
-const PORT = 3000;
-
-// this drops all tables then recreates them based on our JS definitions
-// force true drops the tables; you only need this if you have changed columns/ structure of models. You can remove force: true when you do not need your tables to be dropped.
-const init = async () => {
-  await models.Page.sync({ force: true });
-  await models.User.sync({ force: true });
-  // start your server listening
-  app.listen(PORT, () => {
-    console.log(`App listening in port ${PORT}`);
-  });
-};
-
-init();
 
 // in the Node.js module system, each file is treated as a separate module. https://nodejs.org/api/modules.html#modules_modules
 // export app using module.exports
